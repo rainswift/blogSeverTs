@@ -15,6 +15,10 @@ const routes = [
 	  path: '/login',
 	  component:  import('@/views/login/login.vue'),
 	},
+	{
+	  path: '/edit',
+	  component:  import('@/views/edit.vue'),
+	},
 ]
 
 const router = createRouter({

@@ -9,8 +9,8 @@
 				  <el-input v-model="form.password" />
 				</el-form-item>
 				<el-form-item>
-					<el-button type="primary" @click="onSubmit(formRef)">注册</el-button>
-					<el-button>Cancel</el-button>
+					<el-button type="primary" @click="onLoad(formRef)">登录</el-button>
+					<el-button @click="onSubmit(formRef)">注册</el-button>
 				</el-form-item>
 			</el-form>
 	    <!-- <el-form ref="formRef" :model="myForm" label-width="100px" class="demo-ruleForm">
@@ -29,6 +29,7 @@
 
 <script lang="ts" setup>
 import { reactive } from 'vue'
+import { useRouter } from 'vue-router';
 import request from '@/utils/request'
 // do not use same name with ref
 const form = reactive({
@@ -41,6 +42,17 @@ const onSubmit = (formEl: FormInstance | undefined) => {
 	// if (!formEl) return
 	addUsers()
 
+}
+const router = useRouter()
+const onLoad = async()=>{
+	request.post('http://localhost:8080/load', {
+	  username: form.username,
+	  password: form.password
+	}).then(res => {
+	  
+	  router.push('/edit')
+	  console.log(res.data)
+	})
 }
 const addUsers = async () => {
   request.post('http://localhost:8080/add', {

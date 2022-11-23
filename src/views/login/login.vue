@@ -9,7 +9,7 @@
 				  <el-input v-model="form.password" />
 				</el-form-item>
 				<el-form-item>
-					<el-button type="primary" @click="onSubmit(formRef)">注册</el-button>
+					<el-button type="primary" @click="onSubmit(formRef)">登录</el-button>
 					<el-button>Cancel</el-button>
 				</el-form-item>
 			</el-form>

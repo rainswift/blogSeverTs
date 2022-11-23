@@ -15,6 +15,10 @@ const routes = [
 	  path: '/login',
 	  component:  import('@/views/login/login.vue'),
 	},
+	{
+	  path: '/usreList',
+	  component:  import('@/views/login/usreList.vue'),
+	},
 ]
 
 const router = createRouter({

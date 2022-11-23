@@ -6,7 +6,6 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import router from './router/index'
 
-
 const app = createApp(App)
 
 app.use(router).use(ElementPlus)

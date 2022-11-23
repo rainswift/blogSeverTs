@@ -9,6 +9,7 @@ const service = axios.create({
 //请求拦截
 service.interceptors.request.use(
   (config) => {
+		console.log(config)
     // 拦截的业务逻辑
     //获取本地 token
     // const profile = store.state.user.profile;

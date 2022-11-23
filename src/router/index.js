@@ -16,8 +16,12 @@ const routes = [
 	  component:  import('@/views/login/login.vue'),
 	},
 	{
+	  path: '/usreList',
+	  component:  import('@/views/login/usreList.vue'),
+	},
+	{
 	  path: '/edit',
-	  component:  import('@/views/edit.vue'),
+	  component:  import('@/views/login/login.vue'),
 	},
 ]
 

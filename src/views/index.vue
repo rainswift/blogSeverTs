@@ -4,28 +4,28 @@
 		<comHeader></comHeader>
     <main class="layout" id="content-inner">
       <div class="recent-posts" id="recent-posts">
-        <div class="recent-post-item" v-for="(item,index) in 10">
+        <div class="recent-post-item" v-for="(item,index) in contentList">
           <div class="post_cover " :class="{'left':index%2==0,'right':index%2!=0}">
-						<router-link :to="{path:'/details'}">
+						<router-link :to="{path:'/details/'+item.ID}">
 							<img
 							  class="post_bg"
-							  src="https://one.xbyzs.cf/api/raw/?path=/images/10003.jpg"
+							  :src="item.imgBg"
 							  onerror="this.onerror=null;this.src='/img/404.jpg'"
 							  alt="青年大学习截图api"
 							/>
 						</router-link>
           </div>
           <div class="recent-post-info">
-						<router-link class="article-title" :to="{path:'/details'}">
-							青年大学习截图api
+						<router-link class="article-title" :to="{path:'/details/'+item.ID}">
+							{{item.title}}
 						</router-link>
             <div class="article-meta-wrap">
               <span class="post-meta-date">
                 <i class="far fa-calendar-alt"></i>
                 <span class="article-meta-label">发表于</span>
                 <time
-                  datetime="2022-06-10T09:16:08.000Z"
-                  title="发表于 2022-06-10 17:16:08"
+                  :datetime="item.CreatedAt"
+                  :title="'发表于' +item.CreatedAt"
                   style="display: inline"
                   >5 个月前</time
                 >
@@ -35,14 +35,13 @@
                 <i class="fas fa-inbox"></i>
                 <a
                   class="article-meta__categories"
-                  href="/categories/%E5%AE%9E%E7%94%A8%E6%95%99%E7%A8%8B/"
-                  >实用教程</a
+                  href="javascrit()"
+                  >{{item.label}}</a
                 >
               </span>
             </div>
             <div class="content">
-              此api的功能是获取青年大学习完成后的结尾图
-              所以你只需要手动看几秒青年大学习有了学习记录后，使用此api获取截图上交即可
+              {{item.introduce}}
             </div>
           </div>
         </div>
@@ -190,12 +189,28 @@
 </template>
 
 <script lang="ts" setup>
-import comHeader from '@/components/header'
-export default defineConfig({
-  // ...
-  plugins: [comHeader],
-})
-// components: { comHeader },
+import comHeader from '@/components/header.vue';
+import request from '@/utils/request'
+import {ref} from "vue";
+
+const page = ref(1)
+let contentList = ref([])
+
+const getUsers = async () => {
+  // http://localhost:8080/admin/all?page=1&limit=2
+  request.get('http://localhost:8080/edit/list', {
+    params: {
+      page: page.value,
+      limit: 20,
+      sort:"",
+    }
+  }).then(res => {
+    contentList.value = res.data
+    console.log(contentList)
+  })
+
+}
+getUsers()
 </script>
 
 <style scoped>

@@ -6,6 +6,9 @@
 		<el-form-item label="图片">
 			<el-input v-model="form.imgBg" />
 		</el-form-item>
+    <el-form-item label="介绍">
+      <el-input v-model="form.introduce" />
+    </el-form-item>
 		<el-form-item label="分类">
 			<el-radio-group v-model="form.label">
 				<el-radio label="实用教程" />
@@ -37,6 +40,7 @@ const form = reactive({
  content:'Hello Editor!',
  imgBg:'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-6056f138-61fb-4f09-bc22-b277059a45e3/55d7f93c-3dcd-4de8-9472-596903311a86.jpeg',
  label:'实用教程',
+  introduce:'介绍'
 })
 const save = ((e)=>{
   // let obj = {
@@ -45,7 +49,7 @@ const save = ((e)=>{
   //   imgBg:'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-6056f138-61fb-4f09-bc22-b277059a45e3/55d7f93c-3dcd-4de8-9472-596903311a86.jpeg',
   //   label:'实用教程',
   // }
-  request.post('http://localhost:8080/editSave',form.value).then(res => {
+  request.post('http://localhost:8080/editSave',form).then(res => {
 	  
 	  console.log(res.data)
 	})

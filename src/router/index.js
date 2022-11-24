@@ -21,7 +21,11 @@ const routes = [
 	},
 	{
 	  path: '/edit',
-	  component:  import('@/views/login/login.vue'),
+	  component:  import('@/views/edit.vue'),
+	},
+	{
+	  path: '/details',
+	  component:  import('@/views/details/details.vue'),
 	},
 ]
 

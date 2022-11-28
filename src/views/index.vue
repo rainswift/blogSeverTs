@@ -45,7 +45,8 @@
             </div>
           </div>
         </div>
-        <el-pagination background layout="prev, pager, next"
+				<el-empty description="没有发布文章" v-if="contentList.length == 0" />
+				<el-pagination background layout="prev, pager, next"
                        :page-size="limit"
                        @size-change="handleSizeChange"
                        @current-change="handleCurrentChange"
@@ -66,6 +67,7 @@
 <script lang="ts" setup>
 
 import request from '@/utils/request'
+import {editList} from '@/api/api'
 import {ref} from "vue";
 
 const page = ref(1)
@@ -73,19 +75,32 @@ let total = ref(0)
 let limit = ref(10)
 let contentList = ref([])
 
+
+
 const getUsers = async () => {
   // http://localhost:8080/admin/all?page=1&limit=2
-  request.get('http://localhost:8080/edit/list', {
-    params: {
-      page: page.value,
-      limit: limit.value,
-      sort:"",
-    }
-  }).then(res => {
-    contentList.value = res.data
-    total.value = res.total
-    console.log(contentList)
-  })
+	editList({
+		page: page.value,
+		limit: limit.value,
+		sort:"",
+	}).then((res)=>{
+			console.log(res)
+		  contentList.value = res.data
+		  total.value = res.total
+		  
+	})
+	
+  // request.get('http://localhost:8080/edit/list', {
+  //   params: {
+  //     page: page.value,
+  //     limit: limit.value,
+  //     sort:"",
+  //   }
+  // }).then(res => {
+  //   contentList.value = res.data
+  //   total.value = res.total
+  //   console.log(contentList)
+  // })
 }
 getUsers()
 

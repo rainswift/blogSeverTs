@@ -9,6 +9,7 @@ import comHeader from '@/components/header.vue';
 import comAside from '@/components/comAside.vue';
 
 
+
 const app = createApp(App)
 app.component('comHeader',comHeader)
 app.component('comAside',comAside)

@@ -4,18 +4,18 @@
       <div class="is-center">
         <div class="avatar-img">
           <img
-              src="https://www.chenxuezhi.top/img/avatar.jpg"
+              :src="user.headImg"
               onerror="this.onerror=null;this.src='/img/friend_404.gif'"
               alt="avatar"
           />
         </div>
-        <div class="author-info__name">Cxz</div>
-        <div class="author-info__description">专注技术分享，资源分享</div>
+        <div class="author-info__name">{{user.name}}</div>
+        <div class="author-info__description">{{user.introduce}}</div>
       </div>
       <div class="card-info-social-icons is-center">
         <a
             class="social-icon"
-            href="https://github.com/chenxz21"
+            :href="user.github"
             target="_blank"
             title="Github"
         >
@@ -23,7 +23,7 @@
         </a>
         <a
             class="social-icon"
-            href="mailto:chenxz21@outlook.com"
+            :href="user.qq"
             target="_blank"
             title="Email"
         >
@@ -31,7 +31,7 @@
         </a>
         <a
             class="social-icon"
-            href="tencent://message/?uin=1986994368&amp;Site=&amp;Menu=yes"
+            :href="user.qq"
             target="_blank"
             title="QQ"
         >
@@ -121,10 +121,17 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "comAside"
-}
+<script setup lang="ts">
+import { ref } from 'vue'
+import {getUserInfo} from '@/api/api'
+
+defineProps<{ msg: string }>()
+let user = ref({})
+const count = ref(0)
+getUserInfo().then((res)=>{
+  user.value = res.data
+
+})
 </script>
 
 <style scoped>

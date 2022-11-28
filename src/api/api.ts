@@ -9,6 +9,12 @@ export function editList({data}: { data: any }) {
 		 return res
    })
 }
+export function getUserInfo() {
+    return request.get('http://localhost:8080/getUserInfo').then(res => {
+        return res
+    })
+}
+
 
 export function editSave({data}: { data: any }) {
     console.log(data)

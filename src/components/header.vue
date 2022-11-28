@@ -2,7 +2,7 @@
   <header class="not-top-img" id="page-header">
     <nav id="nav" class="show">
       <span id="blog_name">
-        <a id="site-name" href="/">不吃熊喵</a>
+        <a id="site-name" href="/">{{ user.name }}</a>
       </span>
       <div id="menus">
         <div id="search-button">
@@ -139,10 +139,19 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import {getUserInfo} from '@/api/api'
 
 defineProps<{ msg: string }>()
-
+let user = ref({})
 const count = ref(0)
+getUserInfo().then((res)=>{
+  user.value = res.data
+
+})
+// const getUserInfo =  () => {
+//
+// }
+// getUserInfo()
 </script>
 
 

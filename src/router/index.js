@@ -32,6 +32,11 @@ const routes = [
 			}
 		]
 	},
+	{
+		path: '/userInfo',
+		component:  import('@/views/admin/userInfo.vue'),
+	},
+
 ]
 
 const router = createRouter({

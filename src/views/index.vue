@@ -89,18 +89,6 @@ const getUsers = async () => {
 		  total.value = res.total
 		  
 	})
-	
-  // request.get('http://localhost:8080/edit/list', {
-  //   params: {
-  //     page: page.value,
-  //     limit: limit.value,
-  //     sort:"",
-  //   }
-  // }).then(res => {
-  //   contentList.value = res.data
-  //   total.value = res.total
-  //   console.log(contentList)
-  // })
 }
 getUsers()
 

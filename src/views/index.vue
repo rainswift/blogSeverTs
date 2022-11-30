@@ -77,8 +77,7 @@ let contentList = ref([])
 
 
 
-const getUsers = async () => {
-  // http://localhost:8080/admin/all?page=1&limit=2
+const getList = async () => {
 	editList({
 		page: page.value,
 		limit: limit.value,
@@ -90,15 +89,15 @@ const getUsers = async () => {
 		  
 	})
 }
-getUsers()
+getList()
 
 const handleSizeChange = (val: number) => {
   page.value = val
-  getUsers()
+  getList()
 }
 const handleCurrentChange = (val: number) => {
   page.value = val
-  getUsers()
+  getList()
 }
 </script>
 

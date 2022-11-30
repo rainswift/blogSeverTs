@@ -31,6 +31,7 @@
 import { reactive } from 'vue'
 import { useRouter } from 'vue-router';
 import request from '@/utils/request'
+import { ElMessage } from 'element-plus'
 // do not use same name with ref
 const form = reactive({
   username: '',
@@ -45,12 +46,16 @@ const onSubmit = (formEl: FormInstance | undefined) => {
 }
 const router = useRouter()
 const onLoad = async()=>{
-	request.post('http://localhost:8080/load', {
+	request.post('http://localhost:8080/login', {
 	  username: form.username,
 	  password: form.password
 	}).then(res => {
-	  
-	  router.push('/edit')
+		ElMessage({
+			message: '登录成功',
+			type: 'success',
+		})
+	  localStorage.setItem('token',res.token)
+	  // router.push('/edit')
 	  console.log(res.data)
 	})
 }

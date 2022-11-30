@@ -12,12 +12,12 @@ service.interceptors.request.use(
 		console.log(config)
     // 拦截的业务逻辑
     //获取本地 token
-    // const profile = store.state.user.profile;
-    // //判断是否有 token
-    // if (profile.token) {
-    //   //设置 token
-    //   config.headers.Authorization = `Bearer ${profile.token}`;
-    // }
+    const token = localStorage.getItem("token");
+    //判断是否有 token
+    if (token) {
+      //设置 token
+      config.headers.Authorization = `Bearer ${token}`;
+    }
     return config;
   },
   (err) => {

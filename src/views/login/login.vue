@@ -54,8 +54,10 @@ const onLoad = async()=>{
 			message: '登录成功',
 			type: 'success',
 		})
-	  localStorage.setItem('token',res.token)
-	  // router.push('/edit')
+    localStorage.setItem('token',res.token)
+    localStorage.setItem('userData',JSON.stringify(res.data))
+
+    // router.push('/edit')
 	  console.log(res.data)
 	})
 }

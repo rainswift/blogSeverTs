@@ -4,7 +4,7 @@ import request from '@/utils/request'
 
 
 export const editList = (data) => request.get('http://localhost:8080/edit/list', {params: data});
-export const getUserInfo = (data) => request.get('http://localhost:8080/getUserInfo');
+export const getUserInfo = (data) => request.get('http://localhost:8080/getUserInfo', {params: data});
 export const editSave = (data) => request.post('http://localhost:8080/editSave',data);
 
 // export function editList({data}: { data: any }) {

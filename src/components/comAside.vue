@@ -128,7 +128,8 @@ import {getUserInfo} from '@/api/api'
 defineProps<{ msg: string }>()
 let user = ref({})
 const count = ref(0)
-getUserInfo().then((res)=>{
+let users = JSON.parse(localStorage.getItem('userData'))
+getUserInfo({id:users.ID}).then((res)=>{
   user.value = res.data
 
 })

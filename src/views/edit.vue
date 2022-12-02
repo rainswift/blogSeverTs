@@ -36,6 +36,7 @@ import { ElMessage } from 'element-plus'
 import { useRouter } from 'vue-router';
 
 const router = useRouter()
+console.log(router)
 const text = ref('Hello Editor!');
 let html =''
 const form = reactive({
@@ -47,7 +48,7 @@ const form = reactive({
 })
 
 const save = ((e)=>{
-  request.post('http://localhost:8080/editSave',form).then(res => {
+  request.get('http://localhost:8080/editSave',form).then(res => {
 		ElMessage({
 			message: '文章发布成功',
 			type: 'success',

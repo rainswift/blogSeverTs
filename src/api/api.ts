@@ -6,6 +6,7 @@ import request from '@/utils/request'
 export const editList = (data) => request.get('http://localhost:8080/edit/list', {params: data});
 export const getUserInfo = (data) => request.get('http://localhost:8080/getUserInfo', {params: data});
 export const editSave = (data) => request.post('http://localhost:8080/editSave',data);
+export const editDeatils = (data) => request.get('http://localhost:8080/edit/deatils', {params: data});
 
 // export function editList({data}: { data: any }) {
 //   return request.get('http://localhost:8080/edit/list', {

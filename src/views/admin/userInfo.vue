@@ -34,13 +34,14 @@ const text = ref('Hello Editor!');
 let html =''
 let user = JSON.parse(localStorage.getItem('userData'))
 const form = reactive({
-  name:'雨中燕',
-  headImg:'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-6056f138-61fb-4f09-bc22-b277059a45e3/55d7f93c-3dcd-4de8-9472-596903311a86.jpeg',
-  introduce:'天下地上唯我独尊',
-  github:'https://github.com/rainswift',
-  qq:'837484536',
-  userId: user.ID
+  name:user.name || '雨中燕',
+  headImg:user.headImg ||'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-6056f138-61fb-4f09-bc22-b277059a45e3/55d7f93c-3dcd-4de8-9472-596903311a86.jpeg',
+  introduce:user.introduce ||'天下地上唯我独尊',
+  github:user.github ||'https://github.com/rainswift',
+  qq:user.qq ||'837484536',
+  // userId: user.ID
 })
+
 
 const save = ((e)=>{
   request.post('http://localhost:8080/userSave',form).then(res => {

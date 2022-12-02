@@ -4,7 +4,7 @@
     <main class="layout" id="content-inner">
       <div id="post">
         <div id="post-info">
-          <h1 class="post-title">青年大学习截图api</h1>
+          <h1 class="post-title">{{contentData.title}}</h1>
           <div id="post-meta">
             <div class="meta-firstline">
 					<span class="post-meta-date">
@@ -46,7 +46,7 @@
 <script lang="ts" setup>
 import MdEditor from 'md-editor-v3';
 import 'md-editor-v3/lib/style.css';
-import request from '@/utils/request'
+import {editDeatils}from '@/api/api'
 import {ref} from "vue";
 import { useRouter } from 'vue-router'
 let router = useRouter();
@@ -54,11 +54,10 @@ let id = router.currentRoute.value.params.id
 
 let contentData = ref({})
 const deatils = (item) =>{
-  request.post('http://localhost:8080/edit/deatils', {
+  editDeatils({
     id:id*1
   }).then(res => {
     contentData.value = res.data
-
   })
 }
 deatils()

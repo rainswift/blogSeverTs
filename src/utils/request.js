@@ -1,5 +1,9 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
+import { useRouter } from 'vue-router';
+
+const router = useRouter()
+console.log(router)
 const service = axios.create({
     timeout: 6000, 
     headers: {
@@ -30,6 +34,10 @@ service.interceptors.response.use(
   (res) => {
 		if(res.data.code == 400){
 			 ElMessage.error(res.data.message)
+		}
+		if(res.data.code == 403){
+			 ElMessage.error(res.data.message)
+			 window.location.href="/#/login";
 		}
     return res.data;
   },

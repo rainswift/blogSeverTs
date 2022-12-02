@@ -32,6 +32,7 @@ import { reactive } from 'vue'
 import { useRouter } from 'vue-router';
 import request from '@/utils/request'
 import { ElMessage } from 'element-plus'
+import {getUserInfo} from '@/api/api'
 // do not use same name with ref
 const form = reactive({
   username: '',
@@ -54,11 +55,14 @@ const onLoad = async()=>{
 			message: '登录成功',
 			type: 'success',
 		})
+		getUserInfo({id:res.data.ID}).then((r)=>{
+			localStorage.setItem('userData',JSON.stringify(r.data))
+		})
     localStorage.setItem('token',res.token)
-    localStorage.setItem('userData',JSON.stringify(res.data))
+    
 
     // router.push('/edit')
-	  console.log(res.data)
+	
 	})
 }
 const addUsers = async () => {
@@ -66,8 +70,6 @@ const addUsers = async () => {
     username: form.username,
     password: form.password
   }).then(res => {
-
-    console.log(res.data)
 
   })
 }

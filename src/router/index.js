@@ -21,7 +21,13 @@ const routes = [
 	},
 	{
 	  path: '/edit',
-	  component:  import('@/views/edit.vue'),
+		component:   import('@/views/edit.vue'),
+		children: [
+			{
+				path: ':id',
+				component:  import('@/views/edit.vue'),
+			}
+		]
 	},
 	{
 	  path: '/details',
@@ -33,8 +39,12 @@ const routes = [
 		]
 	},
 	{
-		path: '/userInfo',
+		path: '/admin/userInfo',
 		component:  import('@/views/admin/userInfo.vue'),
+	},
+	{
+		path: '/admin/editList',
+		component:  import('@/views/admin/editList.vue'),
 	},
 
 ]

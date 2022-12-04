@@ -49,6 +49,7 @@ const save = ((e)=>{
       message: '保存成功',
       type: 'success',
     })
+    localStorage.setItem('userData',JSON.stringify(res.data))
     // router.push('/')
   })
   // editSave((obj)=>{

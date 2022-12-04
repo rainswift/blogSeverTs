@@ -28,7 +28,7 @@
 
 <script setup>
 import { ref,reactive } from 'vue';
-import {editSave}from '@/api/api'
+import {editSave,editDeatils}from '@/api/api'
 import MdEditor from 'md-editor-v3';
 import 'md-editor-v3/lib/style.css';
 import request from '@/utils/request'
@@ -36,10 +36,11 @@ import { ElMessage } from 'element-plus'
 import { useRouter } from 'vue-router';
 
 const router = useRouter()
-console.log(router)
+let id = router.currentRoute.value.params.id
+
 const text = ref('Hello Editor!');
 let html =''
-const form = reactive({
+let form = reactive({
   title:'cs',
   content:'Hello Editor!',
   imgBg:'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-6056f138-61fb-4f09-bc22-b277059a45e3/55d7f93c-3dcd-4de8-9472-596903311a86.jpeg',
@@ -47,17 +48,32 @@ const form = reactive({
   introduce:'介绍'
 })
 
-const save = ((e)=>{
-  request.get('http://localhost:8080/editSave',form).then(res => {
-		ElMessage({
-			message: '文章发布成功',
-			type: 'success',
-		})
-		router.push('/')
-	})
-  // editSave((obj)=>{
+if(id){
+  const deatils = (item) =>{
+    editDeatils({
+      id:id*1
+    }).then(res => {
+      let data =  res.data
+      form.title = data.title
+      form.content = data.content
+      form.imgBg = data.imgBg
+      form.label = data.label
+      form.introduce = data.introduce
+      form.ID = data.ID
+      // contentData.value = res.data
+    })
+  }
+  deatils()
+}
 
-  // })
+const save = ((e)=>{
+  editSave(form).then(res => {
+    ElMessage({
+      message: '文章发布成功',
+      type: 'success',
+    })
+    // router.push('/')
+  })
 	console.log(e)
 })
 const saveHtml = ((e)=>{

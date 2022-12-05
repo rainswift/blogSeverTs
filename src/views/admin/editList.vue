@@ -56,7 +56,6 @@
 import { reactive, ref, onMounted } from 'vue'
 import type { FormInstance } from 'element-plus'
 import {editList,editDelect} from '@/api/api'
-import request from '@/utils/request'
 import { useRouter } from 'vue-router';
 
 const router = useRouter()
@@ -85,7 +84,7 @@ const submitSort = (formEl: FormInstance | undefined) => {
 // 删除
 const handleDelete = (item) =>{
 	editDelect({id: item.ID,name:'666'}).then((res)=>{
-		
+
 	})
   // request.post('http://localhost:8080/edit/delect', {
   //   id: item.ID

@@ -1,9 +1,11 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
 import { useRouter } from 'vue-router';
+import qs from "qs";
 
 const router = useRouter()
 console.log(router)
+axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8'
 const service = axios.create({
     timeout: 6000, 
     headers: {
@@ -15,6 +17,9 @@ service.interceptors.request.use(
   (config) => {
 		console.log(config)
     // 拦截的业务逻辑
+      if (config.method === 'post') {
+          config.data =  qs.stringify(config.data);
+      }
     //获取本地 token
     const token = localStorage.getItem("token");
     //判断是否有 token

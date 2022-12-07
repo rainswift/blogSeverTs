@@ -16,8 +16,6 @@ export function editDelect(data) {
 		method: 'post',
 		data: data,
 		headers: {
-			accept:"*/*",
-			connection:"keep-alive",
 			'content-type':"application/x-www-form-urlencoded",
 		},
 	})

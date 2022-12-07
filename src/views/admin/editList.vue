@@ -26,7 +26,8 @@
         <el-row>
           <el-col :span="24" :offset="0">
 
-            <el-table :data="tableData" style="width: 100%">
+            <el-table  ref="multipleTableRef" :data="tableData" style="width: 100%" >
+              <el-table-column type="selection" width="55" />
               <el-table-column prop="title" label="标题" width="180" />
               <el-table-column prop="introduce" label="介绍" />
               <el-table-column label="Operations">
@@ -43,6 +44,9 @@
                 </template>
               </el-table-column>
             </el-table>
+            <div style="margin-top: 20px">
+              <el-button @click="toggleSelection()">Clear selection</el-button>
+            </div>
           </el-col>
         </el-row>
 
@@ -59,7 +63,7 @@ import {editList,editDelect} from '@/api/api'
 import { useRouter } from 'vue-router';
 
 const router = useRouter()
-
+const multipleTableRef = ref<InstanceType<typeof ElTable>>()
 let tableData = ref([])
 let total = ref(0)
 const page = ref(1)
@@ -67,6 +71,8 @@ let limit = ref(10)
 const sortS = reactive({
   username: '',
 })
+let ids = ref([])
+
 
 const handleSizeChange = (val: number) => {
   console.log(`${val} items per page`)
@@ -83,19 +89,28 @@ const submitSort = (formEl: FormInstance | undefined) => {
 
 // 删除
 const handleDelete = (item) =>{
-	editDelect({id: item.ID,name:'666'}).then((res)=>{
+	editDelect({id: item.ID}).then((res)=>{
 
 	})
-  // request.post('http://localhost:8080/edit/delect', {
-  //   id: item.ID
-  // }, {headers: {'Content-Type': 'application/x-www-form-urlencoded'}}).then(res => {
-  //   getList()
-  // })
 }
 // 修改
 const handleEdit = (row) =>{
   router.push('/edit/'+row.ID)
 }
+//全选
+const toggleSelection=()=>{
+  let len =multipleTableRef.value!.getSelectionRows()
+  let ids = []
+  if(len.length > 0){
+    len.map(item=>{
+      ids.push(item.ID)
+    })
+  }
+  editDelect({id:ids.join()}).then((res)=>{
+    getList()
+  })
+}
+
 
 
 const getList = async () => {

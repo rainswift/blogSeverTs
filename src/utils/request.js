@@ -17,7 +17,8 @@ service.interceptors.request.use(
   (config) => {
 		console.log(config)
     // 拦截的业务逻辑
-      if (config.method === 'post') {
+
+      if (config.method === 'post' && config.headers['content-type'] == "application/x-www-form-urlencoded" ) {
           config.data =  qs.stringify(config.data);
       }
     //获取本地 token

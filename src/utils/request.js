@@ -15,7 +15,7 @@ const service = axios.create({
 //请求拦截
 service.interceptors.request.use(
   (config) => {
-		console.log(config)
+	
     // 拦截的业务逻辑
 
       if (config.method === 'post' && config.headers['content-type'] == "application/x-www-form-urlencoded" ) {
@@ -49,8 +49,11 @@ service.interceptors.response.use(
   },
   (err) => {
     // 如果 401 状态码
-    if (err.response && err.response.code === 401) {
-	
+		let response = err.response
+		ElMessage.error(response.data.message)
+    if (response.data.code === 403) {
+			window.location.href="/#/login";
+		
       // //1. 清空本地无效信息
       // // 2.跳转到登录页面，并且需携带当前路由地址给登录页，以便登录成功后返回原页面
       // store.commit("user/setUser", {}); //引入 store 模块
@@ -60,6 +63,7 @@ service.interceptors.response.use(
       // const fullPath = encodeURIComponent(router.currentRoute.value.fullPath);
       // router.push("/login?redirectUrl=" + ""); //引入 router 模块
     }
+		
     return Promise.reject(err);
   }
 );

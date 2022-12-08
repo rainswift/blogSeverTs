@@ -45,7 +45,7 @@
               </el-table-column>
             </el-table>
             <div style="margin-top: 20px">
-              <el-button @click="toggleSelection()">Clear selection</el-button>
+              <el-button @click="toggleSelection()">批量删除</el-button>
             </div>
           </el-col>
         </el-row>

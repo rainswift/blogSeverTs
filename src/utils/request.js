@@ -8,7 +8,8 @@ const router = useRouter()
 console.log(router)
 axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8'
 const service = axios.create({
-    timeout: 6000, 
+    timeout: 6000,
+    baseURL: "http://localhost:8080/",
     headers: {
         'Content-Type': 'application/json;charset=UTF-8;',
     }

@@ -138,12 +138,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import {inject, ref} from 'vue'
 
 defineProps<{ msg: string }>()
 let user = ref({})
 const count = ref(0)
-user.value = JSON.parse(localStorage.getItem('userData'))
+
+const { storageService } = inject("global")
+user.value = JSON.parse(storageService.get(storageService.USER_INFO))
 
 // const getUserInfo =  () => {
 //

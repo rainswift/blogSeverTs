@@ -7,8 +7,9 @@ let headForm = {
 
 export const editList = (data) => request.get('edit/list', {params: data});
 export const getUserInfo = (data) => request.get('getUserInfo', {params: data});
-export const editSave = (data) => request.post('editSave',data);
+export const editSave = (data) => request.post('edit/save',data);
 export const editDeatils = (data) => request.get('edit/deatils', {params: data});
+
 // export const editDelect = (data) => request.post('edit/delect',data,{headers:headForm});
 export function editDelect(data) {
 	return request({

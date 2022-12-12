@@ -9,12 +9,12 @@ export const register = (data) => request.post('add',data);
 export const login = (data) => request.post('login',data);
 
 // 获取用户信息
-const info = () => {
-  return request.get('auth/info');
-};
-
+// const info = () => {
+//   return request.get('auth/info');
+// };
+export const getUserInfo = (data) => request.get('getUserInfo', {params: data});
 export default {
   register,
   login,
-  info,
+  getUserInfo,
 };

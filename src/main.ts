@@ -9,9 +9,15 @@ import comHeader from '@/components/header.vue';
 import comAside from '@/components/comAside.vue';
 import { store } from '@/store'
 import '@/components/comAside.vue';
-console.log(store)
+import storageService from '@/service/storageService';
+
 
 const app = createApp(App)
+
+app.provide('global',{
+    storageService
+})
+
 app.component('comHeader',comHeader)
 app.component('comAside',comAside)
 app.use(router).use(ElementPlus).use(store)

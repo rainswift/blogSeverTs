@@ -7,12 +7,13 @@ import VueAxios from 'vue-axios'
 import router from './router/index'
 import comHeader from '@/components/header.vue';
 import comAside from '@/components/comAside.vue';
-
-
+import { store } from '@/store'
+import '@/components/comAside.vue';
+console.log(store)
 
 const app = createApp(App)
 app.component('comHeader',comHeader)
 app.component('comAside',comAside)
-app.use(router).use(ElementPlus)
+app.use(router).use(ElementPlus).use(store)
 app.use(VueAxios, axios)
 app.mount('#app')

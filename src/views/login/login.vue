@@ -22,21 +22,27 @@
 
 <script lang="ts" setup>
 
-import { reactive,onMounted } from 'vue'
+import { reactive,onMounted,computed } from 'vue'
 import { useRouter } from 'vue-router';
 import request from '@/utils/request'
 import { ElMessage } from 'element-plus'
 import {getUserInfo} from '@/api/api'
+import { useStore } from 'vuex'
 // do not use same name with ref
+
+
 const form = reactive({
   username: '',
   password: '',
 })
+const store = useStore()
+	console.log(store)
 onMounted(()=>{
-	setTimeout(()=>{
-		import('./js/lizi.js')
-		particlesJS()
-	},3000)
+	// setTimeout(()=>{
+	// 	import('./js/lizi.js')
+	// 	particlesJS()
+	// },3000)
+	// let mapActions = mapActions('userModule', { userlogin: 'login' })
 })
 
 const onSubmit = (formEl: FormInstance | undefined) => {
@@ -46,11 +52,9 @@ const onSubmit = (formEl: FormInstance | undefined) => {
 
 }
 const router = useRouter()
-const onLoad = async()=>{
-	request.post('http://localhost:8080/login', {
-	  username: form.username,
-	  password: form.password
-	}).then(res => {
+const onLoad = ()=>{
+
+	store.dispatch('login').then().then(res => {
 		ElMessage({
 			message: '登录成功',
 			type: 'success',
@@ -64,6 +68,23 @@ const onLoad = async()=>{
     // router.push('/edit')
 	
 	})
+	// request.post('http://localhost:8080/login', {
+	//   username: form.username,
+	//   password: form.password
+	// }).then(res => {
+	// 	ElMessage({
+	// 		message: '登录成功',
+	// 		type: 'success',
+	// 	})
+	// 	getUserInfo({id:res.data.ID}).then((r)=>{
+	// 		localStorage.setItem('userData',JSON.stringify(r.data))
+	// 	})
+ //    localStorage.setItem('token',res.token)
+    
+
+ //    // router.push('/edit')
+	
+	// })
 }
 const addUsers = async () => {
   request.post('http://localhost:8080/add', {

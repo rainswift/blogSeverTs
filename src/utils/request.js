@@ -2,6 +2,7 @@ import axios from 'axios'
 import { ElMessage } from 'element-plus'
 import { useRouter } from 'vue-router';
 import qs from "qs";
+import storageService from '../service/storageService';
 
 const router = useRouter()
 console.log(router)
@@ -18,11 +19,11 @@ service.interceptors.request.use(
 	
     // 拦截的业务逻辑
 
-      if (config.method === 'post' && config.headers['content-type'] == "application/x-www-form-urlencoded" ) {
-          config.data =  qs.stringify(config.data);
-      }
+		if (config.method === 'post' && config.headers['content-type'] == "application/x-www-form-urlencoded" ) {
+				config.data =  qs.stringify(config.data);
+		}
     //获取本地 token
-    const token = localStorage.getItem("token");
+    const token = storageService.get(storageService.USER_TOKEN);
     //判断是否有 token
     if (token) {
       //设置 token
@@ -38,13 +39,6 @@ service.interceptors.request.use(
 //响应拦截
 service.interceptors.response.use(
   (res) => {
-		if(res.data.code == 400){
-			 ElMessage.error(res.data.message)
-		}
-		if(res.data.code == 403){
-			 ElMessage.error(res.data.message)
-			 window.location.href="/#/login";
-		}
     return res.data;
   },
   (err) => {
